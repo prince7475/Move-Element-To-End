@@ -1,0 +1,84 @@
+Given an array of integers and an integer, write a function that 
+moves all instances of that integer in the array to the end of the array.
+The function should perform this in place and does not need to maintain
+the order of the other integers 
+
+function moveElementToEnd(array, target){
+  let right = getRightIdx(array,target) // helper
+  let left = getLeftIdx(array,target) // helper
+  
+  while(left < right){
+    let leftV = array[left]
+    let rightV = array[right]
+    if(leftV === target && rightV !== target){
+      swap(left,right,array) // helper
+    }
+    
+    if(array[left] !== target){
+      left++
+    }
+    
+    if(array[right] === target){
+      right--
+    }
+    
+   }
+   
+   return array
+}
+
+
+function getRightIdx(array,toMove){
+  let idx = array.length - 1
+  while(idx >= 0){
+    if(array[idx] !== toMove) return idx
+    idx--
+  }
+  return idx
+}
+
+
+function getLeftIdx(array,toMove){
+  let idx = 0;
+  while(idx < array.length){
+    if(array[idx] === toMove) return idx
+    idx++
+  }
+  return idx
+}
+
+
+function swap(i,j,array){
+  let temp = array[i]
+  array[i] = array[j]
+  array[j] = temp
+}
+
+
+
+
+Time --> O(n)
+space --> O(1)
+
+main(array, target)
+let right = starting at the last index, find an element that does not equal our target and return its index
+let left = starting at index of 0, loop forward until found and element that equals target and return its index
+
+while(left < right){
+  let leftV = array[left]
+  let rightV = array[right]
+  if(leftV === target && rightV !== target){
+    swap(left,right,array)
+  }
+  
+  if(array[left] !== target){
+    left++
+  }
+  
+  if(array[right] === target){
+    right--
+  }
+  
+}
+
+return array
